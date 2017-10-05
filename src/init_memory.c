@@ -5,7 +5,7 @@
 ** Login   <faudil.puttilli@epitech.eu>
 ** 
 ** Started on  Tue Aug 29 20:22:27 2017 guacamole
-** Last update Tue Sep 26 20:01:58 2017 guacamole
+** Last update Thu Oct  5 20:00:11 2017 guacamole
 */
 
 #include "malloc.h"
@@ -66,10 +66,7 @@ void	*new_block(size_t size, t_info *head)
 
   block = NULL;
   if (head->nbr_free_ptr > 0)
-    {
-      write(1, "TF\n", 3);
       block = find_free_memory(size, head);
-    }
   if (block)
     return (block);
   return (create_new_block(size, head));
