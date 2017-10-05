@@ -5,38 +5,47 @@
 ## Login   <faudil.puttilli@epitech.eu>
 ## 
 ## Started on  Tue Sep 26 20:16:17 2017 guacamole
-## Last update Tue Sep 26 20:16:18 2017 guacamole
+## Last update Thu Oct  5 19:45:59 2017 guacamole
 ##
 
-CC	=	gcc -g
+CC = gcc
 
-RM	=	rm -f
+RM = rm -f
 
-FLAGS	+=	-Iinclude -Wall -Wextra
+FLAGS += -Wall -Wextra
 
-CPPFLAGS	+=	-I include/ -Wall -Wextra -W
+CPPFLAGS += -I include/ -Wall -Wextra
 
-NAME	=	libmalloc.a
+NAME = libmy_malloc.so
 
-SRC	=	src/init_memory.c	\
+SRCS 	= 	src/init_memory.c	\
 		src/malloc.c		\
 		src/free.c		\
 		src/list.c		\
 		src/split_block.c
 
-OBJ	=	$(SRC:.c=.o)
+OBJDIR = objs/
 
-all:	$(NAME)
+OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 
-$(NAME): $(OBJ) 
-	ar rc $(NAME) $(OBJ)
+$(OBJDIR)/%.o : %.c
+	mkdir -p $(OBJDIR)
+	mkdir -p $(@D)
+	$(CC) -g -c -fPIC $< -o $@ $(CPPFLAGS)
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	$(CC) $(OBJS) -g -shared -o $(NAME) $(FLAGS)
 
 clean:
-	rm -f $(OBJ)
+	$(RM) $(OBJS)
+	$(RM) -r $(OBJDIR)
 
-fclean:	clean
-	rm -f $(NAME)
+fclean: clean
+	$(RM) $(NAME)
 
-re:	fclean	$(NAME)
+re: fclean all
 
-.PHONY:	all clean fclean re
+.PHONY: all clean fclean re
+

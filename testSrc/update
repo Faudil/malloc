@@ -1,2 +1,2 @@
 cd .. && make re && cd testSrc && 
-cp ../libmalloc.a ./lib && cp ../include/malloc.h ./include && make re  && echo "malloc updated"
+cp ../libmy_malloc.so ./lib && cp ../include/malloc.h ./include && make re  && echo "malloc updated"

@@ -5,7 +5,7 @@
 ## Login   <faudil.puttilli@epitech.eu@epitech.net>
 ## 
 ## Started on  Mon Dec 12 13:56:55 2016 Faudil Puttilli
-## Last update Tue Sep 12 20:16:50 2017 guacamole
+## Last update Thu Oct  5 19:47:57 2017 guacamole
 ##
 
 CC	= 	gcc -g
@@ -14,7 +14,7 @@ RM	= 	rm -f
 
 CFLAGS	+=	-I./include -W -Wall
 
-LDFLAGS += -L lib -lmy -lmalloc
+LDFLAGS += -L lib -lmy
 
 NAME    = 	test_malloc
 
