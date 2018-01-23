@@ -5,14 +5,14 @@
 ** Login   <faudil.puttilli@epitech.eu>
 ** 
 ** Started on  Thu Sep  7 20:10:31 2017 guacamole
-** Last update Mon Jan 22 14:51:36 2018 guacamole
+** Last update Tue Jan 23 15:41:11 2018 guacamole
 */
 
 #ifndef MALLOC_H_
 # define MALLOC_H_
 
 # define MAX_ALLOC_SIZE 200000
-# define HEADER_SIZE  13;
+# define HEADER_SIZE  sizeof(t_header);
 
 # define GET_HEADER(block) (t_header *)(block - sizeof(t_header))
 # define GET_BLOCK(header) (void *)(header + sizeof(t_header))
@@ -48,6 +48,8 @@ void *new_block(size_t, t_info *);
 void update_head(t_header *, t_info *);
 void *find_free_memory(size_t , t_info *);
 void *create_new_block(size_t , t_info *);
+
+void *alloc_page(int, t_info *);
 
 t_header *getPrev(t_header *);
 

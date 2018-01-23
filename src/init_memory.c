@@ -5,7 +5,7 @@
 ** Login   <faudil.puttilli@epitech.eu>
 ** 
 ** Started on  Tue Aug 29 20:22:27 2017 guacamole
-** Last update Mon Jan 22 14:52:18 2018 guacamole
+** Last update Tue Jan 23 15:37:18 2018 guacamole
 */
 
 #include "malloc.h"
@@ -45,8 +45,8 @@ void *create_new_block(size_t size, t_info *head)
 	t_header *old_last;
 	void *block;
 
-	if (size > to_fill)
-		block = sbrk(size + sizeof(t_header));
+	if (size > head->to_fill)
+		block = alloc_page(size / getpagesize() + 1, head);
 	if (block == (void *) -1)
 		return NULL;
 	old_last = head->end;
