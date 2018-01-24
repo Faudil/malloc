@@ -5,7 +5,7 @@
 ** Login   <faudil.puttilli@epitech.eu>
 ** 
 ** Started on  Thu Sep  7 20:04:49 2017 guacamole
-** Last update Mon Jan 22 14:33:38 2018 guacamole
+** Last update Wed Jan 24 13:34:28 2018 guacamole
 */
 
 #include "malloc.h"
@@ -19,11 +19,11 @@ void free_last()
 	if (head->end != head->begin)
 	{
 		header = head->end;
-		brk(header);
 		header = getPrev(head->end);
 		header->next = NULL;
 		head->end = header;
 	}
+	head->to_fill += header->size + sizeof(t_header);
 	head->nbr_ptr--;
 }
 

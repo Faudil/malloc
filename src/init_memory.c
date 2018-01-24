@@ -5,11 +5,12 @@
 ** Login   <faudil.puttilli@epitech.eu>
 ** 
 ** Started on  Tue Aug 29 20:22:27 2017 guacamole
-** Last update Tue Jan 23 15:37:18 2018 guacamole
+** Last update Wed Jan 24 13:49:50 2018 guacamole
 */
 
 #include "malloc.h"
 #include <unistd.h>
+#include <string.h>
 
 void update_head(t_header *header, t_info *head)
 {
@@ -43,17 +44,23 @@ void *create_new_block(size_t size, t_info *head)
 {
 	t_header *header;
 	t_header *old_last;
-	void *block;
+	void *block = NULL;
 
 	if (size > head->to_fill)
 		block = alloc_page(size / getpagesize() + 1, head);
-	if (block == (void *) -1)
-		return NULL;
+	head->to_fill -= size + sizeof(t_header);
 	old_last = head->end;
-	if (old_last != NULL)
+	if (old_last != NULL) {
+		if (block == NULL) {
+			block = old_last;
+			block += sizeof(t_header) + old_last->size;
+		}
 		old_last->next = block;
+	}
+	if (block == NULL)
+		return NULL;
 	header = (t_header *) block;
-	header->size = size;
+ 	header->size = size;
 	header->is_free = 0;
 	header->next = NULL;
 	update_head(header, head);
@@ -69,5 +76,8 @@ void *new_block(size_t size, t_info *head)
 		block = find_free_memory(size, head);
 	if (block)
 		return (GET_BLOCK(block));
-	return (GET_BLOCK(create_new_block(size, head)));
+	block = create_new_block(size, head);
+	if (block)
+		return (GET_BLOCK(block));
+	return (NULL);
 }

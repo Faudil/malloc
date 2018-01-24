@@ -7,16 +7,12 @@
 
 #include "malloc.h"
 
-void *alloc_page(int nbPage, t_info *head)
+void *alloc_page(int nb_page, t_info *head)
 {
-	void *block = sbrk(getpagesize());
+	void *block = sbrk(getpagesize() * nb_page);
 
 	if (block == (void *) -1)
 		return (NULL);
-	head->to_fill += getpagesize();
-	for (int i; i < nbPage; i++) {
-		if (sbrk(getpagesize()) == (void *) -1)
-			return (NULL);
-	}
+	head->to_fill += getpagesize() * nb_page;
 	return (block);
 }

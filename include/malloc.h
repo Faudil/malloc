@@ -5,7 +5,7 @@
 ** Login   <faudil.puttilli@epitech.eu>
 ** 
 ** Started on  Thu Sep  7 20:10:31 2017 guacamole
-** Last update Tue Jan 23 15:41:11 2018 guacamole
+** Last update Tue Jan 23 16:10:26 2018 guacamole
 */
 
 #ifndef MALLOC_H_
@@ -42,7 +42,6 @@ void *calloc(size_t, size_t);
 void *realloc(void *, size_t);
 
 void free(void *);
-
 void split_block(size_t, t_info *, t_header *);
 void *new_block(size_t, t_info *);
 void update_head(t_header *, t_info *);
