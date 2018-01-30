@@ -4,3 +4,6 @@
 *#*
 *~*
 *.out
+*.so
+CMake*
+cmake*
