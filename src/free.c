@@ -5,7 +5,7 @@
 ** Login   <faudil.puttilli@epitech.eu>
 ** 
 ** Started on  Thu Sep  7 20:04:49 2017 guacamole
-** Last update Wed Jan 24 13:34:28 2018 guacamole
+** Last update Tue Jan 30 16:29:29 2018 guacamole
 */
 
 #include "malloc.h"
@@ -24,12 +24,12 @@ void free_last()
 		head->end = header;
 	}
 	head->to_fill += header->size + sizeof(t_header);
-	head->nbr_ptr--;
+	head->nbr_free_ptr++;
 }
 
 void markAsFree(t_header *header)
 {
-	header->is_free = 0;
+	header->is_free = 1;
 	head->nbr_free_ptr++;
 }
 
@@ -37,13 +37,13 @@ void free(void *block)
 {
 	t_header *header;
 
-	if (head == NULL)
-		return ;
+	if (head == NULL || block == NULL)
+		return;
 	header = GET_HEADER(block);
 	if (header == head->end)
 		free_last();
 	else {
-		header->is_free = 0;
+		markAsFree(header);
 	}
 	if (head->nbr_ptr == head->nbr_free_ptr)
 	{

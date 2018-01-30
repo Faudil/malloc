@@ -14,5 +14,6 @@ void *alloc_page(int nb_page, t_info *head)
 	if (block == (void *) -1)
 		return (NULL);
 	head->to_fill += getpagesize() * nb_page;
+	head->page_allocated++;
 	return (block);
 }

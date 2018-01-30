@@ -5,10 +5,10 @@
 ## Login   <faudil.puttilli@epitech.eu>
 ## 
 ## Started on  Tue Sep 26 20:16:17 2017 guacamole
-## Last update Tue Jan 23 15:40:56 2018 guacamole
+## Last update Fri Jan 26 15:39:26 2018 guacamole
 ##
 
-CC = gcc
+CC = gcc -g -O0
 
 RM = rm -f
 

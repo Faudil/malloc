@@ -1,15 +1,11 @@
 /*
-** init_memory.c for my_malloc in /home/guacamole/Epitech/malloc
-** 
-** Made by guacamole
-** Login   <faudil.puttilli@epitech.eu>
-** 
-** Started on  Tue Aug 29 20:22:27 2017 guacamole
-** Last update Wed Jan 24 13:49:50 2018 guacamole
+** EPITECH PROJECT, 2018
+** azfazhf
+** File description:
+** azfaz
 */
 
 #include "malloc.h"
-#include <unistd.h>
 #include <string.h>
 
 void update_head(t_header *header, t_info *head)
@@ -20,58 +16,64 @@ void update_head(t_header *header, t_info *head)
 	head->nbr_ptr++;
 }
 
-void *find_free_memory(size_t size, t_info *head)
+t_header *find_free_memory(size_t size, t_info *head)
 {
 	t_header *header;
 	t_header *least;
 
 	header = head->begin;
 	least = NULL;
-	while (header != head->end)
+	while (header && header != head->end)
 	{
-		if (header->is_free == 1 && header->size == size)
-			return ((void *) (header));
-		else if (header->is_free == 1 && header->size >= size)
+		if (header->is_free == 1 && header->size == size) {
+			header->is_free = 0;
+			return (header);
+		}
+		else if (header->is_free == 1 && header->size > size)
 			least = header;
 		header = header->next;
 	}
-	if (least)
+	if (least) {
 		split_block(size, head, least);
+		least->is_free = 0;
+	}
 	return (least);
 }
 
-void *create_new_block(size_t size, t_info *head)
+t_header *create_new_block(size_t size, t_info *head)
 {
 	t_header *header;
-	t_header *old_last;
-	void *block = NULL;
+	static size_t id = 0;
+	t_header *old_last = head->end;
+	char *block = NULL;
 
-	if (size > head->to_fill)
-		block = alloc_page(size / getpagesize() + 1, head);
-	head->to_fill -= size + sizeof(t_header);
-	old_last = head->end;
-	if (old_last != NULL) {
-		if (block == NULL) {
-			block = old_last;
-			block += sizeof(t_header) + old_last->size;
-		}
-		old_last->next = block;
+	if (old_last == NULL) {
+		block = (char *) (head);
+		block += sizeof(t_info);
 	}
+	else {
+		block = (char *) old_last;
+		block += old_last->size + (size_t) sizeof(t_header);
+		old_last->next = (t_header *) block;
+	}
+	if ((char *) (block + sizeof(t_header) + size) >= (char *) sbrk(0))
+		alloc_page(size / getpagesize() + 1, head);
 	if (block == NULL)
 		return NULL;
+        head->to_fill -= size + sizeof(t_header) + 1;
 	header = (t_header *) block;
  	header->size = size;
+	header->id = id++;
 	header->is_free = 0;
 	header->next = NULL;
 	update_head(header, head);
-	return (block);
+	return ((t_header *) block);
 }
 
 void *new_block(size_t size, t_info *head)
 {
-	void *block;
+	t_header *block = NULL;
 
-	block = NULL;
 	if (head->nbr_free_ptr > 0)
 		block = find_free_memory(size, head);
 	if (block)
