@@ -5,13 +5,12 @@
 ** Login   <faudil.puttilli@epitech.eu>
 ** 
 ** Started on  Thu Sep  7 20:10:31 2017 guacamole
-** Last update Tue Jan 30 20:57:57 2018 guacamole
+** Last update Wed Jan 31 13:26:07 2018 guacamole
 */
 
 #ifndef MALLOC_H_
 # define MALLOC_H_
 
-# define MAX_ALLOC_SIZE 200000
 # define HEADER_SIZE  sizeof(t_header)
 
 # define GET_HEADER(block) ((t_header *)(block) - 1)
