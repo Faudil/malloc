@@ -1,0 +1,9 @@
+.idea
+*.o
+.DS_STORE
+*#*
+*~*
+*.out
+*.so
+CMake*
+cmake*
