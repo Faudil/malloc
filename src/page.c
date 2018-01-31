@@ -7,7 +7,7 @@
 
 #include "malloc.h"
 
-void *alloc_page(int nb_page, t_info *head)
+void *alloc_page(size_t nb_page, t_info *head)
 {
 	void *block = sbrk(getpagesize() * nb_page);
 

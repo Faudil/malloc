@@ -5,7 +5,7 @@
 ** Login   <faudil.puttilli@epitech.eu>
 ** 
 ** Started on  Tue Aug 29 19:57:10 2017 guacamole
-** Last update Tue Jan 30 17:26:46 2018 guacamole
+** Last update Wed Jan 31 13:21:07 2018 guacamole
 */
 
 #include "malloc.h"
@@ -37,5 +37,5 @@ void *malloc(size_t size)
 	if (head == NULL)
 		return (NULL);
 	block = new_block(size, head);
-        return (block);
+	return (block);
 }

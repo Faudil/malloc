@@ -40,34 +40,33 @@ t_header *find_free_memory(size_t size, t_info *head)
 	return (least);
 }
 
+static void init_header(t_header *to_init, const size_t size)
+{
+	to_init->size = size;
+	to_init->is_free = 0;
+	to_init->next = NULL;
+}
+
 t_header *create_new_block(size_t size, t_info *head)
 {
-	t_header *header;
-	static size_t id = 0;
-	t_header *old_last = head->end;
-	char *block = NULL;
+	uintptr_t old_last = (uintptr_t) head->end;
+	t_header *header_last = head->end;
+	uintptr_t block_pos = 0;
 
-	if (old_last == NULL) {
-		block = (char *) (head);
-		block += sizeof(t_info);
+	if (size + HEADER_SIZE >= head->to_fill) {
+		if (alloc_page((size + HEADER_SIZE) / getpagesize() + 1, head) == NULL)
+			return (NULL);
 	}
-	else {
-		block = (char *) old_last;
-		block += old_last->size + (size_t) sizeof(t_header);
-		old_last->next = (t_header *) block;
-	}
-	if ((char *) (block + sizeof(t_header) + size) >= (char *) sbrk(0))
-		alloc_page(size / getpagesize() + 1, head);
-	if (block == NULL)
-		return NULL;
-        head->to_fill -= size + sizeof(t_header) + 1;
-	header = (t_header *) block;
- 	header->size = size;
-	header->id = id++;
-	header->is_free = 0;
-	header->next = NULL;
-	update_head(header, head);
-	return ((t_header *) block);
+	if (old_last == 0)
+		block_pos = ((uintptr_t)head) + sizeof(t_info);
+	else
+		block_pos = old_last + HEADER_SIZE + header_last->size;
+	init_header((t_header *) block_pos, size);
+	if (header_last)
+		header_last->next = (t_header *) block_pos;
+	update_head((t_header *) block_pos, head);
+	head->to_fill -= HEADER_SIZE + size;
+	return ((t_header *) block_pos);
 }
 
 void *new_block(size_t size, t_info *head)
@@ -76,8 +75,10 @@ void *new_block(size_t size, t_info *head)
 
 	if (head->nbr_free_ptr > 0)
 		block = find_free_memory(size, head);
-	if (block)
+	if (block) {	
+		head->nbr_free_ptr--;
 		return (GET_BLOCK(block));
+	}
 	block = create_new_block(size, head);
 	if (block)
 		return (GET_BLOCK(block));

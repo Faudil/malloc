@@ -5,7 +5,7 @@
 ** Login   <faudil.puttilli@epitech.eu>
 ** 
 ** Started on  Tue Sep 19 19:53:58 2017 guacamole
-** Last update Tue Jan 30 16:29:51 2018 guacamole
+** Last update Tue Jan 30 16:44:33 2018 guacamole
 */
 
 #include "malloc.h"
@@ -15,7 +15,6 @@ extern t_info *head;
 size_t get_buffer_size(void *buffer)
 {
 	t_header *header = GET_HEADER(buffer);
-
 	return (header->size);
 }
 

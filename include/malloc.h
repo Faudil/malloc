@@ -5,19 +5,20 @@
 ** Login   <faudil.puttilli@epitech.eu>
 ** 
 ** Started on  Thu Sep  7 20:10:31 2017 guacamole
-** Last update Thu Jan 25 18:05:07 2018 guacamole
+** Last update Tue Jan 30 20:57:57 2018 guacamole
 */
 
 #ifndef MALLOC_H_
 # define MALLOC_H_
 
 # define MAX_ALLOC_SIZE 200000
-# define HEADER_SIZE  sizeof(t_header);
+# define HEADER_SIZE  sizeof(t_header)
 
 # define GET_HEADER(block) ((t_header *)(block) - 1)
 # define GET_BLOCK(header) ((t_header *)(header) + 1)
 
 #include <stddef.h>
+#include <stdint.h>
 #include <unistd.h>
 
 typedef struct		s_header
@@ -34,8 +35,8 @@ typedef	struct		s_info
 	t_header		*end;
 	size_t			page_allocated;
 	size_t			to_fill;
-	long long		nbr_ptr;
-	long long		nbr_free_ptr;
+	size_t			nbr_ptr;
+	size_t			nbr_free_ptr;
 } __attribute__((packed)) t_info;
 
 void *malloc(size_t);
@@ -49,7 +50,7 @@ void update_head(t_header *, t_info *);
 t_header *find_free_memory(size_t , t_info *);
 t_header *create_new_block(size_t , t_info *);
 
-void *alloc_page(int, t_info *);
+void *alloc_page(size_t, t_info *);
 
 t_header *getPrev(t_header *);
 
