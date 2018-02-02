@@ -1,11 +1,8 @@
 /*
-** malloc.h for malloc in /home/guacamole/Epitech/malloc/testSrc
-** 
-** Made by guacamole
-** Login   <faudil.puttilli@epitech.eu>
-** 
-** Started on  Thu Sep  7 20:10:31 2017 guacamole
-** Last update Wed Jan 31 13:26:07 2018 guacamole
+** EPITECH PROJECT, 2018
+** malloc
+** File description:
+** header
 */
 
 #ifndef MALLOC_H_
@@ -13,8 +10,8 @@
 
 # define HEADER_SIZE  sizeof(t_header)
 
-# define GET_HEADER(block) ((t_header *)(block) - 1)
-# define GET_BLOCK(header) ((t_header *)(header) + 1)
+# define GET_HEADER(block) (((t_header *) block) - 1)
+# define GET_BLOCK(header) (((t_header *) header) + 1)
 
 #include <stddef.h>
 #include <stdint.h>
@@ -23,10 +20,10 @@
 typedef struct		s_header
 {
 	size_t		size;
-	size_t		id;
 	char		is_free;
 	struct s_header	*next;
-} __attribute__((packed)) t_header;
+	char		data[1];
+} t_header;
 
 typedef	struct		s_info
 {

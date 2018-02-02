@@ -1,11 +1,8 @@
 /*
-** malloc.c for malloc in /home/guacamole/Epitech/malloc
-** 
-** Made by guacamole
-** Login   <faudil.puttilli@epitech.eu>
-** 
-** Started on  Tue Aug 29 19:57:10 2017 guacamole
-** Last update Wed Jan 31 13:21:07 2018 guacamole
+** EPITECH PROJECT, 2018
+** malloc
+** File description:
+** zaze
 */
 
 #include "malloc.h"
@@ -30,12 +27,15 @@ t_info *init_head()
 
 void *malloc(size_t size)
 {
-	void *block;
+	char *block;
 
 	if (head == NULL)
 		head = init_head();
 	if (head == NULL)
 		return (NULL);
-	block = new_block(size, head);
+	size = (((((size) - 1) >> 2) << 2) + 4);
+	block = (char *) new_block(size, head);
+	for (size_t i = 0; i < size; i++)
+		block[i] = 0;
 	return (block);
 }
