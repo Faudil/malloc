@@ -25,6 +25,7 @@ t_header *find_free_memory(size_t size, t_info *head)
 			header->is_free = 0;
 			header->size = size;
                         head->nbr_free_ptr--;
+			split_block(size, head, header);
 			return (header);
 		}
 		header = header->next;

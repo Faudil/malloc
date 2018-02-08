@@ -13,7 +13,7 @@ void split_block(size_t size, t_info *head, t_header *header)
 	t_header *new_header = (t_header *) new;
 
 	if (header->size > HEADER_SIZE + size) {
-		new_header->is_free = 2;
+		new_header->is_free = 1;
 		if (head->end == header)
 			head->end = new_header;
 		new_header->next = header->next;

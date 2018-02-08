@@ -10,7 +10,6 @@
 void merge_next(t_header *header, t_info *head)
 {
 	if (header->is_free == 1 && header->next && header->next->is_free) {
-		write(1, "Block merge\n", 12);
 		header->size += HEADER_SIZE + header->next->size;
 		header->next = header->next->next;
 		if (header->next)
