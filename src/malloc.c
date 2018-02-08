@@ -6,8 +6,10 @@
 */
 
 #include "malloc.h"
+#include <pthread.h>
 
 t_info *head = NULL;
+pthread_mutex_t mutex;
 
 t_info *init_head()
 {
@@ -33,7 +35,9 @@ void *malloc(size_t size)
 		head = init_head();
 	if (head == NULL)
 		return (NULL);
+	pthread_mutex_lock(&mutex);
 	size = (size + (sizeof(size_t) - 1)) & ~(sizeof(size_t) - 1);
 	block = (char *) new_block(size, head);
+	pthread_mutex_unlock(&mutex);
 	return (block);
 }
