@@ -35,7 +35,7 @@ void *malloc(size_t size)
 		return (NULL);
 	size = (((((size) - 1) >> 2) << 2) + 4);
 	block = (char *) new_block(size, head);
-	for (size_t i = 0; i < size; i++)
-		block[i] = 0;
+/*	for (size_t i = 0; i < size; i++)
+	block[i] = 0;*/
 	return (block);
 }

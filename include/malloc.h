@@ -19,9 +19,11 @@
 
 typedef struct		s_header
 {
+	size_t		magic;
 	size_t		size;
 	char		is_free;
 	struct s_header	*next;
+	struct s_header	*prev;
 	char		data[1];
 } t_header;
 
@@ -49,5 +51,8 @@ t_header *create_new_block(size_t , t_info *);
 void *alloc_page(size_t, t_info *);
 
 t_header *getPrev(t_header *);
+
+void merge_prev(t_header *, t_info *);
+void merge_next(t_header *, t_info *);
 
 #endif /* !MALLOC_H_ */

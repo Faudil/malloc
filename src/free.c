@@ -1,11 +1,8 @@
 /*
-** free.c for malloc in /home/guacamole/Epitech/malloc
-** 
-** Made by guacamole
-** Login   <faudil.puttilli@epitech.eu>
-** 
-** Started on  Thu Sep  7 20:04:49 2017 guacamole
-** Last update Fri Feb  2 16:08:32 2018 guacamole
+** EPITECH PROJECT, 2018
+** malloc
+** File description:
+** free
 */
 
 #include "malloc.h"
@@ -19,7 +16,7 @@ void free_last()
 
 	if (head->end != head->begin)
 	{
-		header = getPrev(head->end);
+		header = head->end->prev;
 		header->next = NULL;
 		head->end = header;
 	}
@@ -27,25 +24,23 @@ void free_last()
 	head->nbr_ptr--;
 }
 
-void markAsFree(t_header *header)
+void mark_as_free(t_header *header)
 {
-	header->is_free = 1;
+	header->is_free = 2;
 	head->nbr_free_ptr++;
 }
 
 void free(void *block)
 {
 	t_header *header;
+	uintptr_t h_pos = (uintptr_t) block;
 
-	if (head == NULL || block == NULL)
+	if (!head || !block || (t_info *) block < head)
 		return;
-	header = GET_HEADER(block);
-	if (header == head->end)
-		free_last();
-	else
-		markAsFree(header);
-	if (head->nbr_ptr == head->nbr_free_ptr)
-	{
+        h_pos -= sizeof(t_header);
+        header = (t_header *) h_pos;
+	mark_as_free(header);
+        if (head->nbr_ptr == head->nbr_free_ptr) {
 		brk(head);
 		head = NULL;
 	}
