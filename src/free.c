@@ -26,7 +26,7 @@ void free_last()
 
 void mark_as_free(t_header *header)
 {
-	header->is_free = 2;
+	header->is_free = 1;
 	head->nbr_free_ptr++;
 }
 

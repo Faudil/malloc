@@ -21,7 +21,7 @@ t_header *find_free_memory(size_t size, t_info *head)
 
 	while (header)
 	{
-		if (header->is_free == 2 && header->size >= size) {
+		if (header->is_free == 1 && header->size >= size) {
 			header->is_free = 0;
 			header->size = size;
                         head->nbr_free_ptr--;
@@ -70,10 +70,10 @@ void *new_block(size_t size, t_info *head)
 	if (head->nbr_free_ptr > 0)
 		block = find_free_memory(size, head);
 	if (block)
-		return (block->data);
+		return (GET_BLOCK(block));
 	block = create_new_block(size, head);
 	if (block) {
-		return (block->data);
+		return (GET_BLOCK(block));
 	}
 	return (NULL);
 }

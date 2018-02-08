@@ -24,7 +24,6 @@ typedef struct		s_header
 	char		is_free;
 	struct s_header	*next;
 	struct s_header	*prev;
-	char		data[1];
 } t_header;
 
 typedef	struct		s_info
