@@ -67,10 +67,10 @@ void *new_block(size_t size, t_info *head)
 {
 	t_header *block = NULL;
 
-/*	if (head->nbr_free_ptr > 0)
-	block = find_free_memory(size, head);
+	if (head->nbr_free_ptr > 0)
+		block = find_free_memory(size, head);
 	if (block)
-	return (block->data);*/
+		return (block->data);
 	block = create_new_block(size, head);
 	if (block) {
 		return (block->data);
