@@ -11,10 +11,10 @@ extern t_info *head;
 
 int my_strlen(char *s)
 {
-        int i;
+	int i;
 
-        for (i = 0; s[i]; i++);
-        return (i);
+	for (i = 0; s[i]; i++);
+	return (i);
 }
 
 void put_nbr(long long nb)
@@ -24,23 +24,21 @@ void put_nbr(long long nb)
 	if (nb > 9)
 		put_nbr(nb / 10);
 	c = nb % 10 + '0';
-        write(1, &c, 1);
+	write(1, &c, 1);
 }
 
-void my_put_base(uintptr_t  nbr, char *base)
+void my_put_base(uintptr_t nbr, char *base)
 {
 	int i;
 	unsigned int size;
 
 	i = 12;
 	size = my_strlen(base);
-	if (nbr > size - 1)
-	{
+	if (nbr > size - 1) {
 		i = nbr % size;
 		my_put_base(nbr / size, base);
 		write(1, &base[i], 1);
-	}
-	else
+	} else
 		write(1, &base[nbr], 1);
 }
 
@@ -53,7 +51,7 @@ void show_alloc_mem()
 {
 	t_header *header = head->begin;
 
-        putstr("break : ");
+	putstr("break : ");
 	my_put_base((uintptr_t) sbrk(0), "0123456789ABCDEF");
 	write(1, "\n", 1);
 	while (header) {

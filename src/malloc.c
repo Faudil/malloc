@@ -13,7 +13,7 @@ pthread_mutex_t mutex;
 
 t_info *init_head()
 {
-	t_info	*info;
+	t_info *info;
 
 	info = sbrk(getpagesize());
 	if (info == (void *) -1)

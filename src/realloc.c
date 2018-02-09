@@ -20,19 +20,20 @@ size_t get_buffer_size(void *buffer)
 
 void *realloc(void *ptr, size_t size)
 {
-        char *new;
-        char *chptr;
+	char *new;
+	char *chptr;
 
-        if (ptr && size == 0) {
-                free(ptr);
-                return (NULL);
-        }
-        chptr = (char *) ptr;
-        new = malloc(size);
-        if (new == NULL || ptr == NULL)
-                return (new);
-	for (size_t i = 0, old = get_buffer_size(ptr); i < old && i < size;i++)
-                new[i] = chptr[i];
-        free(ptr);
-        return ((void *) new);
+	if (ptr && size == 0) {
+		free(ptr);
+		return (NULL);
+	}
+	chptr = (char *) ptr;
+	new = malloc(size);
+	if (new == NULL || ptr == NULL)
+		return (new);
+	for (size_t i = 0, old = get_buffer_size(ptr);
+	     i < old && i < size; i++)
+		new[i] = chptr[i];
+	free(ptr);
+	return ((void *) new);
 }

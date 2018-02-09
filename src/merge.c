@@ -19,7 +19,6 @@ void merge_next(t_header *header, t_info *head)
 	}
 }
 
-
 void merge_prev(t_header *header, t_info *head)
 {
 	if (header->is_free == 1 && header->prev && header->prev->is_free) {

@@ -22,12 +22,12 @@ void free(void *block)
 
 	if (!head || !block || (t_info *) block < head)
 		return;
-        h_pos -= sizeof(t_header);
-        header = (t_header *) h_pos;
+	h_pos -= sizeof(t_header);
+	header = (t_header *) h_pos;
 	mark_as_free(header);
 	merge_next(header, head);
 	merge_prev(header, head);
-        if (head->nbr_ptr == head->nbr_free_ptr) {
+	if (head->nbr_ptr == head->nbr_free_ptr) {
 		brk(head);
 		head = NULL;
 	}
