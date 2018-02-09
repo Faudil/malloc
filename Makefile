@@ -5,10 +5,10 @@
 ## Login   <faudil.puttilli@epitech.eu>
 ## 
 ## Started on  Tue Sep 26 20:16:17 2017 guacamole
-## Last update Thu Feb  8 15:30:03 2018 guacamole
+## Last update Fri Feb  9 02:10:37 2018 guacamole
 ##
 
-CC = gcc -O0
+CC = gcc -O2
 
 RM = rm -f
 
@@ -26,6 +26,7 @@ SRCS 	= 	src/init_memory.c	\
 		src/list.c		\
 		src/page.c		\
 		src/merge.c		\
+		src/show_alloc_mem.c	\
 		src/split_block.c
 
 OBJDIR = objs/

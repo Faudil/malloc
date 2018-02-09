@@ -43,10 +43,6 @@ void *realloc(void *, size_t);
 void free(void *);
 void split_block(size_t, t_info *, t_header *);
 void *new_block(size_t, t_info *);
-void update_head(t_header *, t_info *);
-t_header *find_free_memory(size_t , t_info *);
-t_header *create_new_block(size_t , t_info *);
-
 void *alloc_page(size_t, t_info *);
 
 t_header *getPrev(t_header *);
