@@ -18,16 +18,19 @@ void update_head(t_header *header, t_info *head)
 t_header *find_free_memory(size_t size, t_info *head)
 {
 	t_header *header = head->begin;
+	size_t i = 0;
+	size_t all_free = head->nbr_free_ptr;
 
-	while (header)
+	while (header && i < all_free)
 	{
-		if (header->is_free == 1 && header->size >= size) {
+		if (header->is_free && header->size >= size) {
 			header->is_free = 0;
 			header->size = size;
                         head->nbr_free_ptr--;
 			split_block(size, head, header);
 			return (header);
 		}
+		i += header->is_free ? 1 : 0;
 		header = header->next;
 	}
 	return (NULL);
@@ -73,8 +76,7 @@ void *new_block(size_t size, t_info *head)
 	if (block)
 		return (GET_BLOCK(block));
 	block = create_new_block(size, head);
-	if (block) {
+	if (block)
 		return (GET_BLOCK(block));
-	}
 	return (NULL);
 }

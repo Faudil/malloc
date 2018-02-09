@@ -9,21 +9,6 @@
 
 extern t_info *head;
 
-void free_last()
-{
-	t_header *header;
-	t_header *last = head->end;
-
-	if (head->end != head->begin)
-	{
-		header = head->end->prev;
-		header->next = NULL;
-		head->end = header;
-	}
-	head->to_fill += HEADER_SIZE + last->size;
-	head->nbr_ptr--;
-}
-
 void mark_as_free(t_header *header)
 {
 	header->is_free = 1;
