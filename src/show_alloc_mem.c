@@ -47,7 +47,7 @@ void putstr(char *str)
 	write(1, str, my_strlen(str));
 }
 
-void show_alloc_mem()
+void show_alloc_mem(void)
 {
 	t_header *header = head->begin;
 

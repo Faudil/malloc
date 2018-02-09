@@ -11,7 +11,7 @@
 t_info *head = NULL;
 pthread_mutex_t mutex;
 
-t_info *init_head()
+t_info *init_head(void)
 {
 	t_info *info;
 

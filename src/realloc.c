@@ -1,11 +1,8 @@
 /*
-** realloc.c for malloc in /home/guacamole/Epitech/malloc
-** 
-** Made by guacamole
-** Login   <faudil.puttilli@epitech.eu>
-** 
-** Started on  Tue Sep 19 19:53:58 2017 guacamole
-** Last update Tue Feb  6 15:08:20 2018 guacamole
+** EPITECH PROJECT, 2018
+** malloc
+** File description:
+** realloc
 */
 
 #include "malloc.h"
