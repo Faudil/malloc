@@ -7,7 +7,7 @@
 
 #include "malloc.h"
 
-void update_head(t_header *header, t_info *head)
+static void update_head(t_header *header, t_info *head)
 {
 	if (head->begin == NULL)
 		head->begin = header;
@@ -15,7 +15,7 @@ void update_head(t_header *header, t_info *head)
 	head->nbr_ptr++;
 }
 
-t_header *find_free_memory(size_t size, t_info *head)
+static t_header *find_free_memory(size_t size, t_info *head)
 {
 	t_header *header = head->begin;
 	size_t i = 0;
@@ -44,7 +44,7 @@ static void init_header(t_header *to_init, t_header *last, const size_t size)
 	to_init->prev = last;
 }
 
-t_header *create_new_block(size_t size, t_info *head)
+static t_header *create_new_block(size_t size, t_info *head)
 {
 	uintptr_t begin_heap = (uintptr_t) head;
 	uintptr_t old_last = (uintptr_t) head->end;
