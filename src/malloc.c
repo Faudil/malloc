@@ -9,7 +9,7 @@
 #include <pthread.h>
 
 t_info *head = NULL;
-pthread_mutex_t mutex;
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 t_info *init_head(void)
 {
