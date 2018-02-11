@@ -1,11 +1,8 @@
 ##
-## Makefile for malloc in /home/guacamole/Epitech/malloc
-## 
-## Made by guacamole
-## Login   <faudil.puttilli@epitech.eu>
-## 
-## Started on  Tue Sep 26 20:16:17 2017 guacamole
-## Last update Fri Feb  9 02:10:37 2018 guacamole
+## EPITECH PROJECT, 2018
+## malloc
+## File description:
+## malloc
 ##
 
 CC = gcc -O2
@@ -23,7 +20,6 @@ SRCS 	= 	src/init_memory.c	\
 		src/calloc.c		\
 		src/realloc.c		\
 		src/free.c		\
-		src/list.c		\
 		src/page.c		\
 		src/merge.c		\
 		src/show_alloc_mem.c	\
